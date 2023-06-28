@@ -11,7 +11,6 @@ addBtn.addEventListener("click", () => {
     generateNumsDiv(nameInput.value, numInput.value, typeOfNum.value)
   }
 })
-
 nameInput.addEventListener("keydown", (e) => focus(e))
 numInput.addEventListener("keydown", (e) => focus(e))
 
@@ -37,10 +36,7 @@ function generateNumsDiv(name, num, type) {
   setLocalFunc(contents.children)
 
   for (const trash of document.querySelectorAll(".fa-trash")) {
-    trash.addEventListener("click", (e) => {
-      e.target.parentElement.remove()
-      setLocalFunc(contents.children)
-    })
+    removeItem(trash)
   }
 }
 
@@ -71,11 +67,14 @@ function getLocalFunc() {
   }
 }
 
-getLocalFunc()
-
-for (const trash of document.querySelectorAll(".fa-trash")) {
+function removeItem(trash) {
   trash.addEventListener("click", (e) => {
     e.target.parentElement.remove()
     setLocalFunc(contents.children)
   })
+}
+
+getLocalFunc()
+for (const trash of document.querySelectorAll(".fa-trash")) {
+  removeItem(trash)
 }
