@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root{
+    --color :#285430;
+    --color2:#5F8D4E;
+    --background2:#A4BE7B;
+    --background :#E5D9B6;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    font-family: vazir;
+    background-color: var(--background);
+}
+
+.container{
+    padding: 25px;
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid var(--color);
+    border-radius: 7px; */
+}
+
+h1{
+   color: var(--color);
+}
+
+.inputs{
+    margin-top: 20px;
+}
+
+.nameInput,
+.numInput{
+    border: 1px solid var(--color);
+    color: var(--color);
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    border-radius: 7px;
+    background-color: var(--background);
+}
+
+.nameInput::placeholder,
+.numInput::placeholder{
+    font-family: vazir;
+    color: var(--color);
+}
+
+.typeOfNum{
+    font-family: vazir;
+    padding: 3px;
+    outline: none;
+    border: 1px solid var(--color);
+    border-radius: 7px;
+    color: var(--color);
+    background-color: var(--background);
+}
+
+
+
+.fa-plus{
+    background-color: var(--color);
+    color: var(--background);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.showType{
+   margin-top: 30px; 
+   font-family: vazir;
+   outline: none;
+   border: 1px solid var(--color);
+   border-radius: 7px;
+   padding: 5px;
+   width: 60%;
+   color: var(--color);
+   background-color: var(--background);
+}
+
+.contents{
+    margin: 15px 0 150px 0;
+    width: 60%;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color2);
+    border-radius: 7px;
+    padding: 15px;
+    background-color: var(--background2);
+    color: var(--color);
+    margin-top: 10px;
+}
+
+.infos{
+    border-left: 2px solid var(--background);
+    width: 90%;
+}
+
+.fa-trash{
+    padding: 33px 10px;
+   cursor: pointer;
+   font-size: 18px;
+   color: var(--background);
+}
+
+@font-face {
+    font-family: vazir;
+    src: url(Vazir.woff);
+}
