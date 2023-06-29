@@ -4,7 +4,10 @@ const typeOfNum = document.querySelector(".typeOfNum")
 const showType = document.querySelector(".showType")
 const addBtn = document.querySelector(".fa-plus")
 const contents = document.querySelector(".contents")
+const selectFilter = document.querySelector(".showType")
 let contentArray = []
+let userSelect
+
 
 addBtn.addEventListener("click", () => {
   if (nameInput.value && numInput.value) {
@@ -31,13 +34,13 @@ function generateNumsDiv(name, num, type) {
   </div>`
 
   contents.insertAdjacentHTML("beforeend", temp)
+
+  setLocalFunc(contents.children)
   numInput.value = ""
   nameInput.value = ""
-  setLocalFunc(contents.children)
+ selectFilter.value = 'همگی'
 
-  for (const trash of document.querySelectorAll(".fa-trash")) {
-    removeItem(trash)
-  }
+  removeItem()
 }
 
 function setLocalFunc(array) {
@@ -67,14 +70,38 @@ function getLocalFunc() {
   }
 }
 
-function removeItem(trash) {
-  trash.addEventListener("click", (e) => {
-    e.target.parentElement.remove()
-    setLocalFunc(contents.children)
-  })
+function removeItem() {
+  for (const trash of document.querySelectorAll(".fa-trash")) {
+    trash.addEventListener("click", (e) => {
+      e.target.parentElement.remove()
+      setLocalFunc(contents.children)
+    })
+  }
 }
 
 getLocalFunc()
-for (const trash of document.querySelectorAll(".fa-trash")) {
-  removeItem(trash)
-}
+removeItem()
+
+selectFilter.addEventListener("click", (e) => {
+  userSelect = selectFilter.value
+  if (userSelect.includes("های")) {
+    userSelect = userSelect.slice(-5)
+  }
+  let getLocal = JSON.parse(localStorage.getItem("contacts"))
+  let temp
+  contents.innerHTML = ""
+  getLocal.forEach((item) => {
+    if (item.includes(`${userSelect}`)) {
+      temp = `<div class="content">
+                ${item}
+              </div>`
+
+      contents.insertAdjacentHTML("beforeend", temp)
+      removeItem()
+    }
+  })
+
+  if (userSelect == "همگی") {
+    getLocalFunc()
+  }
+})
