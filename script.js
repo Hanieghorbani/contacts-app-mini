@@ -15,6 +15,35 @@ addBtn.addEventListener("click", () => {
 })
 nameInput.addEventListener("keydown", (e) => focus(e))
 numInput.addEventListener("keydown", (e) => focus(e))
+selectFilter.addEventListener("click", (e) => {
+  userSelect = selectFilter.value
+  if (userSelect.includes("های")) {
+    userSelect = userSelect.slice(-5)
+  }
+  let getLocal = JSON.parse(localStorage.getItem("contacts"))
+  let temp
+  contents.innerHTML = ""
+  getLocal.forEach((item) => {
+    if (!item.includes(`${userSelect}`) && userSelect != "همگی") {
+      temp = `<div class="content" style="display:none">
+                ${item}
+              </div>`
+      contents.insertAdjacentHTML("beforeend", temp)
+    } else if (userSelect != "همگی" && item.includes(`${userSelect}`)) {
+      temp = `<div class="content" style="display:flex">
+                ${item}
+              </div>`
+      contents.insertAdjacentHTML("beforeend", temp)
+      removeItem()
+    }
+  })
+
+  if (userSelect == "همگی") {
+    contents.innerHTML = ''
+    getLocalFunc()
+    removeItem()
+  }
+})
 
 function focus(e) {
   if (e.keyCode == 13) {
@@ -72,40 +101,14 @@ function getLocalFunc() {
 function removeItem() {
   for (const trash of document.querySelectorAll(".fa-trash")) {
     trash.addEventListener("click", (e) => {
-      e.target.parentElement.remove()
-      setLocalFunc(contents.children)
+      e.target.parentElement.classList.add("fall")
+      setTimeout(() => {
+        e.target.parentElement.remove()
+        setLocalFunc(contents.children)
+      }, 500)
     })
   }
 }
 
 getLocalFunc()
 removeItem()
-
-selectFilter.addEventListener("click", (e) => {
-  userSelect = selectFilter.value
-  if (userSelect.includes("های")) {
-    userSelect = userSelect.slice(-5)
-  }
-  let getLocal = JSON.parse(localStorage.getItem("contacts"))
-  let temp
-  contents.innerHTML = ""
-  getLocal.forEach((item) => {
-    if (!item.includes(`${userSelect}`) && userSelect != "همگی") {
-      console.log(item)
-      temp = `<div class="content" style="display:none">
-                ${item}
-              </div>`
-      contents.insertAdjacentHTML("beforeend", temp)
-    } else if (userSelect != "همگی" && item.includes(`${userSelect}`)) {
-      temp = `<div class="content" style="display:flex">
-                ${item}
-              </div>`
-      contents.insertAdjacentHTML("beforeend", temp)
-      removeItem()
-    }
-  })
-
-  if (userSelect == "همگی") {
-    getLocalFunc()
-  }
-})
