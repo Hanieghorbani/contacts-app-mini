@@ -8,7 +8,6 @@ const selectFilter = document.querySelector(".showType")
 let contentArray = []
 let userSelect
 
-
 addBtn.addEventListener("click", () => {
   if (nameInput.value && numInput.value) {
     generateNumsDiv(nameInput.value, numInput.value, typeOfNum.value)
@@ -38,7 +37,7 @@ function generateNumsDiv(name, num, type) {
   setLocalFunc(contents.children)
   numInput.value = ""
   nameInput.value = ""
- selectFilter.value = 'همگی'
+  selectFilter.value = "همگی"
 
   removeItem()
 }
@@ -91,11 +90,16 @@ selectFilter.addEventListener("click", (e) => {
   let temp
   contents.innerHTML = ""
   getLocal.forEach((item) => {
-    if (item.includes(`${userSelect}`)) {
-      temp = `<div class="content">
+    if (!item.includes(`${userSelect}`) && userSelect != "همگی") {
+      console.log(item)
+      temp = `<div class="content" style="display:none">
                 ${item}
               </div>`
-
+      contents.insertAdjacentHTML("beforeend", temp)
+    } else if (userSelect != "همگی" && item.includes(`${userSelect}`)) {
+      temp = `<div class="content" style="display:flex">
+                ${item}
+              </div>`
       contents.insertAdjacentHTML("beforeend", temp)
       removeItem()
     }
